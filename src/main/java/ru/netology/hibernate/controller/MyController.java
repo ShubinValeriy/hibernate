@@ -9,11 +9,6 @@ import ru.netology.hibernate.service.MyService;
 @RestController
 public class MyController {
     private final MyService service;
-    private String name;
-    private String surname;
-    private Integer age;
-    private String phoneNumber;
-    private String cityOfLiving;
 
     public MyController(MyService service) {
         this.service = service;
