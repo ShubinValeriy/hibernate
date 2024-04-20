@@ -1,7 +1,6 @@
 package ru.netology.hibernate.service;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.netology.hibernate.entity.Person;

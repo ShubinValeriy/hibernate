@@ -12,12 +12,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "Persons")
+@Table(name = "Persons",schema = "datafortest")
 public class Person {
     @EmbeddedId
     private PersonRequisites personRequisites;
+
     @Column(nullable = false)
     private String phone_number;
+
     @Column(nullable = false)
     private String city_of_living;
 }

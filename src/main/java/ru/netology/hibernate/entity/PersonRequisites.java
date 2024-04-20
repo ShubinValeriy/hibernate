@@ -15,8 +15,10 @@ import java.io.Serializable;
 public class PersonRequisites implements Serializable {
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
     private String surname;
+
     @Column(nullable = false)
     private Integer age;
 }
