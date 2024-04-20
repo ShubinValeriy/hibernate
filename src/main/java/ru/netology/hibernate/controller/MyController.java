@@ -25,4 +25,17 @@ public class MyController {
         return service.getPersonsByCity(city);
     }
 
+    @GetMapping("persons/by-age")
+    public ResponseEntity<String> getPersonsByAge(@RequestParam Integer age) {
+        return service.getPersonsByAgeLessThan(age);
+    }
+
+    @GetMapping("persons/by-name-and-surname")
+    public ResponseEntity<String> getPersonsByNameAndSurname(
+            @RequestParam String name,
+            @RequestParam String surname
+    ) {
+        return service.getPersonsByNameAndSurname(name,surname);
+    }
+
 }
