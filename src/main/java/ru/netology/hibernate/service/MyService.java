@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import ru.netology.hibernate.entity.Person;
 import ru.netology.hibernate.repository.MyJPARepository;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MyService {
@@ -23,7 +25,7 @@ public class MyService {
     }
 
     public ResponseEntity<String> getPersonsByCity(String city) {
-        List<Person> personsByCity = myRepository.findPersonByCityOfLiving(city);
+        List<Person> personsByCity = myRepository.findPersonFromCity(city);
         if (personsByCity.isEmpty()) {
             return new ResponseEntity<>("PERSON NOT FOUND", HttpStatus.NOT_FOUND);
         }
@@ -32,7 +34,7 @@ public class MyService {
 
     public ResponseEntity<String> getPersonsByAgeLessThan(Integer age) {
         List<Person> personsByAge = myRepository
-                .findPersonByPersonRequisites_AgeLessThanOrderByPersonRequisites_Age(age);
+                .findPersonLessThan(age);
         if (personsByAge.isEmpty()) {
             return new ResponseEntity<>("PERSON NOT FOUND", HttpStatus.NOT_FOUND);
         }
@@ -41,14 +43,20 @@ public class MyService {
 
 
     public ResponseEntity<String> getPersonsByNameAndSurname(String name, String surname) {
-       Optional<Person> personsByNameAndSurname = myRepository
-                .findPersonByPersonRequisites_NameAndPersonRequisites_Surname(
+       List<Optional<Person>> personsByNameAndSurname = myRepository
+                .findPersonByNameAndSurname(
                         name, surname
                 );
         if (personsByNameAndSurname.isEmpty()) {
             return new ResponseEntity<>("PERSON NOT FOUND", HttpStatus.NOT_FOUND);
+        }else {
+            List<Person> personList = new ArrayList<>();
+            for (Optional<Person> person:personsByNameAndSurname){
+                personList.add(person.get());
+            }
+            return new ResponseEntity<>(personList.toString(), HttpStatus.OK);
         }
-        return new ResponseEntity<>(personsByNameAndSurname.get().toString(), HttpStatus.OK);
+
     }
 
 }
